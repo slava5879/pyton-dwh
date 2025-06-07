@@ -3,12 +3,12 @@ import duckdb
 import pandas as pd
 from sqlalchemy import create_engine
 
-# === Налаштування ===
+# === Settings ===
 
-# Шлях до Parquet-файлу
-parquet_file = 'your_data.parquet'
+# path to your Parquet file
+parquet_file = '.\\src\\org\\output\\example.parquet'
 
-# Параметри підключення до PostgreSQL
+# PostgreSQL settings
 pg_user = config.user
 pg_password = config.password
 pg_host = 'localhost'
@@ -16,18 +16,19 @@ pg_port = '5432'
 pg_db = 'postgres'
 pg_table = 'example_table'
 
-# === Крок 1: Завантаження з Parquet через DuckDB ===
+# === Step 1: Downloading *.parquet file via DuckDB ===
 
-# Використовуємо DuckDB для читання parquet
+# use DuckDB to read parquet
 con = duckdb.connect()
 df = con.execute(f"SELECT * FROM read_parquet('{parquet_file}')").fetchdf()
 
-# === Крок 2: Запис у PostgreSQL через SQLAlchemy ===
+# === Step 2: Write in PostgreSQL via SQLAlchemy ===
 
-# Формуємо рядок підключення
+# Create SQLAlchemy engine for PostgreSQL
 engine = create_engine(f'postgresql+psycopg2://{pg_user}:{pg_password}@{pg_host}:{pg_port}/{pg_db}')
 
-# Запис даних у таблицю (створить або допише)
+# insert data into PostgreSQL table
+# if the table does not exist, it will be created
 df.to_sql(pg_table, engine, if_exists='replace', index=False)
 
-print(f"Дані успішно імпортовані в таблицю `{pg_table}`")
+print(f"Data successfully inserted into '{pg_table}' table in PostgreSQL database '{pg_db}'.")
