@@ -40,4 +40,4 @@ if __name__ == "__main__":
         #pg_db='postgres'
     )
     importer.read_parquet('.\\src\\org\\output\\example.parquet')
-    importer.write_to_postgres(pg_table='example_table', if_exists='append')
+    importer.write_to_postgres(pg_table='example_table', if_exists='append')  # Change if_exists to append/replace/fail as needed
