@@ -54,14 +54,15 @@ def calculate_optimal_purchase(price_item1, price_item2, total_budget, add_amoun
     add_investment = add_amount - min_remainder
     return best_qty_item1, best_qty_item2, add_investment # Round the remainder
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
     # Example usage
-    price_item1 = 1012.6  # Price of item 1
-    price_item2 = 1022.82  # Price of item 2
-    total_budget = 50000.0  # Total budget
+    price_item1 = 1023.76  # Price of item 1 #09.26
+    price_item2 = 1010.74  # Price of item 2 #10.26
+    total_budget = 73200  # Total budget
 
-    qty_item1, qty_item2, add_investment = calculate_optimal_purchase(price_item1, price_item2, total_budget)
+    qty_item1, qty_item2, add_investment = calculate_optimal_purchase(price_item1, price_item2, total_budget, add_amount=10)
     
+    print(f"Initial budget            : {total_budget}")
     print(f"Optimal quantity of item 1: {qty_item1}")
     print(f"Optimal quantity of item 2: {qty_item2}")
     print(f"Additional investment     : {add_investment:.2f}")
