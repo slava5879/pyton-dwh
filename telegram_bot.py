@@ -50,8 +50,8 @@ async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("I don't know yet this object. Send 'apple', 'carrot', 'lemon', 'book', 'cat' or 'hot wheels'.")
 
 def main():
-    token = '8468201372:AAEQQ5S1pVsMP6jkM_8ASAzfiZqbGktNLaY'
-    #token = os.getenv("8468201372:AAEQQ5S1pVsMP6jkM_8ASAzfiZqbGktNLaY")
+    token = ''
+    #token = os.getenv("")
     if not token:
         logger.error("TELEGRAM_TOKEN environment variable is not set.")
         return

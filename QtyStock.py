@@ -56,11 +56,11 @@ def calculate_optimal_purchase(price_item1, price_item2, total_budget, add_amoun
 
 if __name__ == "__main__": 
     # Example usage
-    price_item1 = 1023.76  # Price of item 1 #09.26
-    price_item2 = 1010.74  # Price of item 2 #10.26
-    total_budget = 73200  # Total budget
+    price_item1 = 1068.30  # Price of item 1 #10.06 sense
+    price_item2 = 1040.55  # Price of item 2 #19.08 sense
+    total_budget = 75000  # Total budget
 
-    qty_item1, qty_item2, add_investment = calculate_optimal_purchase(price_item1, price_item2, total_budget, add_amount=10)
+    qty_item1, qty_item2, add_investment = calculate_optimal_purchase(price_item1, price_item2, total_budget, add_amount=20)
     
     print(f"Initial budget            : {total_budget}")
     print(f"Optimal quantity of item 1: {qty_item1}")
