@@ -1,4 +1,4 @@
-def calculate_optimal_purchase(price_item1, price_item2, total_budget, add_amount=10):
+def calculate_optimal_purchase(price_item1, price_item2, total_budget, fee, add_amount=0):
     """
     Calculate the optimal quantities of two items to purchase within a given budget, minimizing the remaining budget.
     Args:
@@ -15,6 +15,13 @@ def calculate_optimal_purchase(price_item1, price_item2, total_budget, add_amoun
     that leaves the smallest remainder, preferring combinations that spend more of the budget if multiple combinations
     leave the same remainder.
     """
+    if price_item1 == 0:
+        price_item1 = 1000000  # Set to a very high value to avoid division by zero
+    if price_item2 == 0:
+        price_item2 = 1000000  # Set to a very high value to avoid division by zero
+
+    price_item1 = price_item1 *(1 + fee/100)  # Adjust price of item 1 by adding the fee
+    price_item2 = price_item2 *(1 + fee/100)  # Adjust price of item 2 by adding the fee
 
     min_remainder = float('inf')  # Initialize the minimum remainder with infinity
     best_qty_item1 = 0
@@ -56,13 +63,23 @@ def calculate_optimal_purchase(price_item1, price_item2, total_budget, add_amoun
 
 if __name__ == "__main__": 
     # Example usage
-    price_item1 = 1068.30  # Price of item 1 #10.06 sense
-    price_item2 = 1040.55  # Price of item 2 #19.08 sense
-    total_budget = 75000  # Total budget
+    fee = 0.2                # Fee percentage: 0,2 means 0.2%
+    add_amount = 10          # Additional amount to add to the total budget
+    price_item1 = 1040.00    # Price of item 1
+    price_item2 = 0          # Price of item 2
+    total_budget = 71290     # Total budget
 
-    qty_item1, qty_item2, add_investment = calculate_optimal_purchase(price_item1, price_item2, total_budget, add_amount=20)
+    qty_item1, qty_item2, add_investment = calculate_optimal_purchase(price_item1, price_item2, total_budget, fee, add_amount)
     
+    print(f"Item1 price               : {price_item1*(1 + fee/100):.3f}")
+    print(f"Item2 price               : {price_item2*(1 + fee/100):.3f}")
     print(f"Initial budget            : {total_budget}")
     print(f"Optimal quantity of item 1: {qty_item1}")
     print(f"Optimal quantity of item 2: {qty_item2}")
     print(f"Additional investment     : {add_investment:.2f}")
+
+    ##1067.03 8 sense
+    ##1053.65 9 sense
+    #1047.35 10 sense
+    #1059.43 11 sense
+    #1045.18 12 sense
