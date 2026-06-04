@@ -5,6 +5,11 @@ def calculate_optimal_purchase(price_item1, price_item2, fee, total_budget, add_
    best_qty_item2 = 0
    total_budget = total_budget + add_amount
 
+   if price_item1 <= 0:
+        price_item1 = 1000000
+   if price_item2 <= 0:
+        price_item2 = 1000000  # Set to a very high value to avoid division by zero
+
    # add fee to the prices
    price_item1_with_fee = price_item1 * (1 + fee / 100)
    price_item2_with_fee = price_item2 * (1 + fee / 100)
